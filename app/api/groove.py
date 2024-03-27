@@ -11,5 +11,5 @@ router = APIRouter(
 
 @router.get("/")
 def get_reservation_info():
-    groove.get_status()
+    groove.get_reservation_info()
     return {"message": "get groove png"}

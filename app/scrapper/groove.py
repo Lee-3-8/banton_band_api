@@ -1,9 +1,9 @@
 from . import chromeDriver, config
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.relative_locator import locate_with
+from selenium.webdriver.common.keys import Keys
 
 
-def get_status():
+def get_reservation_info():
 
     chromeDriver.get(config['GROOVE_URL'])
     chromeDriver.switch_to.frame('main')
@@ -16,20 +16,15 @@ def get_status():
         config['GROOVE_ID'])
     chromeDriver.find_element(by=By.ID, value='login_pw').send_keys(
         config['GROOVE_PWD'])
-    # chromeDriver.find_element(by=By.CLASS_NAME, value='login_box').find_element(
-    #     by=By.TAG_NAME, value='span').find_element(
-    #     by=By.TAG_NAME, value='input').click()
-# chromeDriver.find_element(locate_with(By.TAG_NAME, "input").near({By.ID: "login_pw"})).click()
-    chromeDriver.find_element(locate_with(By.TAG_NAME, "span").to_right_of(
-        {By.ID: "login_pw"})).click()
-    chromeDriver.implicitly_wait(5)
+    chromeDriver.find_element(
+        by=By.XPATH, value='//*[@id="sc_zone"]/div/div/div[2]/div/div/div/div[2]/form/div/div/div[1]/span/input').click()
+    chromeDriver.find_element(
+        by=By.XPATH, value='//*[@id="sc_zone"]/div/div/div[2]/div/div/div/div[2]/form/div/div/div[1]/span/input').click()
 
-    # login_button = chromeDriver.find_element(By.LINK_TEXT, 'Login')
-    # login_button = chromeDriver.find_element(By.CLASS_NAME, 'util_w')
-    # login_button.click()
-    # print(login_button)
-    # chromeDriver.implicitly_wait(5)
+    # 로그인 클릭이 안된다... 도움 도움!
 
-    chromeDriver.get_screenshot_as_file('groove4.png')    # capture
+    chromeDriver.implicitly_wait(10)
+
+    chromeDriver.get_screenshot_as_file('groove4.png')    # captsure
 
     return
